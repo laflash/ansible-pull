@@ -10,3 +10,5 @@
 
   tasks:
     - include: ./tasks/packages.yaml
+    - include: ./tasks/users.yaml
+    - include: ./tasks/cron.yaml
