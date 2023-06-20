@@ -2,11 +2,11 @@
 - hosts: localhost
   become: true
 
+  pre_tasks:
+    - name: update repositories cache and upgrade packages
+      apt:
+        update_cache: yes
+      changed_when: false
+
   tasks:
-  - name: install htop
-    package:
-      name:
-      - htop
-      - btop
-      - tmux
-      - vim-nox
+    - include: tasks/packages.yml
