@@ -1,6 +1,6 @@
  ---
  - hosts: all
-   connection: local
+   name: base-node init
    become: true
 
    tasks:
