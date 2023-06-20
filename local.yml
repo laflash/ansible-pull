@@ -10,5 +10,16 @@
 
   tasks:
     - include: ./tasks/packages.yaml
+    - include: ./tasks/democratic-csi-reqierments.yaml
     - include: ./tasks/users.yaml
     - include: ./tasks/cron.yaml
+
+  handlers:
+    - name: multipath-tools status
+      service:
+        name: multipath-tools
+        state: started
+    - name: open-iscsi status
+      service:
+        name: open-iscsi
+        state: started

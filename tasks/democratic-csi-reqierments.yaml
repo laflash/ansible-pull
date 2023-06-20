@@ -1,0 +1,35 @@
+- name: Install packages for using democratic CSI driver in Ubuntu 22.O4
+  apt:
+    name: "{{ packages }}"
+    allow_unauthenticated: yes
+    state: present
+    force_apt_get: yes
+    update_cache: yes
+  vars:
+    packages:
+      - cifs-utils
+      - nfs-common
+      - open-iscsi
+      - lsscsi
+      - sg3-utils
+      - multipath-tools
+      - scsitools
+
+- name: Add conf multipath tools
+  blockinfile:
+    path: "/etc/multipath.conf"
+    block: |
+      defaults {
+          user_friendly_names yes
+          find_multipaths yes
+      }
+
+- name: install and configure dependencies
+  shell: |
+    sudo systemctl enable multipath-tools.service
+    sudo service multipath-tools restart
+    sudo systemctl enable open-iscsi.service
+    sudo service open-iscsi start
+  notify:
+    - multipath-tools status
+    - open-iscsi status
