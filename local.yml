@@ -1,8 +1,8 @@
- ---
- - hosts: localhost
-   become: true
+---
+- host: localhost
+  become: true
 
-   tasks:
-     - name: install htop
-       package:
-         name: htop
+  tasks:
+  - name: install htop
+    package:
+      name: htop
